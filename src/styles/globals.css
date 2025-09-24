@@ -1,0 +1,253 @@
+/* Global CSS Custom Properties for Theming */
+
+:root {
+  /* ===== COLOR SYSTEM ===== */
+
+  /* Primary Colors */
+  --color-primary: #007acc;
+  --color-primary-hover: #005999;
+  --color-primary-active: #004080;
+  --color-primary-light: #66b3e5;
+
+  /* Background Colors */
+  --color-bg-primary: #fefefe;    /* Off-white main background */
+  --color-bg-secondary: #f8f9fa;  /* Secondary background */
+  --color-bg-tertiary: #f1f3f4;   /* Tertiary background */
+  --color-bg-elevated: #ffffff;   /* Elevated surfaces (modals, cards) */
+  --color-bg-overlay: rgba(0, 0, 0, 0.5); /* Modal overlay */
+
+  /* Text Colors */
+  --color-text-primary: #2d3748;   /* Main text */
+  --color-text-secondary: #718096; /* Secondary text */
+  --color-text-tertiary: #a0aec0;  /* Tertiary text */
+  --color-text-inverse: #ffffff;   /* Text on dark backgrounds */
+  --color-text-muted: #9ca3af;     /* Muted text */
+
+  /* UI Element Colors */
+  --color-border-primary: #e2e8f0;
+  --color-border-secondary: #cbd5e0;
+  --color-border-focus: #4299e1;
+  --color-divider: #f1f5f9;
+
+  /* Interactive Colors */
+  --color-hover: #f7fafc;
+  --color-active: #edf2f7;
+  --color-focus: #4299e1;
+  --color-focus-ring: rgba(66, 153, 225, 0.2);
+
+  /* Status Colors */
+  --color-success: #48bb78;
+  --color-success-bg: #f0fff4;
+  --color-warning: #ed8936;
+  --color-warning-bg: #fffaf0;
+  --color-error: #f56565;
+  --color-error-bg: #fed7d7;
+  --color-info: #4299e1;
+  --color-info-bg: #ebf8ff;
+
+  /* Editor Specific Colors */
+  --color-editor-bg: #ffffff;
+  --color-editor-selection: #b3d4fc;
+  --color-editor-cursor: #2d3748;
+  --color-editor-line-numbers: #a0aec0;
+  --color-editor-current-line: #f7fafc;
+
+  /* ===== TYPOGRAPHY SYSTEM ===== */
+
+  /* Font Families */
+  --font-family-ui: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-family-editor: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+  --font-family-mono: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+
+  /* Font Sizes */
+  --font-size-xs: 0.75rem;    /* 12px */
+  --font-size-sm: 0.875rem;   /* 14px */
+  --font-size-base: 1rem;     /* 16px */
+  --font-size-lg: 1.125rem;   /* 18px */
+  --font-size-xl: 1.25rem;    /* 20px */
+  --font-size-2xl: 1.5rem;    /* 24px */
+  --font-size-3xl: 1.875rem;  /* 30px */
+  --font-size-4xl: 2.25rem;   /* 36px */
+
+  /* Line Heights */
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+
+  /* Font Weights */
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Letter Spacing */
+  --letter-spacing-tight: -0.025em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.025em;
+
+  /* ===== LAYOUT SYSTEM ===== */
+
+  /* Spacing Scale */
+  --spacing-xs: 0.25rem;   /* 4px */
+  --spacing-sm: 0.5rem;    /* 8px */
+  --spacing-md: 1rem;      /* 16px */
+  --spacing-lg: 1.5rem;    /* 24px */
+  --spacing-xl: 2rem;      /* 32px */
+  --spacing-2xl: 3rem;     /* 48px */
+  --spacing-3xl: 4rem;     /* 64px */
+
+  /* Border Radius */
+  --border-radius-sm: 0.125rem;  /* 2px */
+  --border-radius-md: 0.25rem;   /* 4px */
+  --border-radius-lg: 0.5rem;    /* 8px */
+  --border-radius-xl: 0.75rem;   /* 12px */
+  --border-radius-2xl: 1rem;     /* 16px */
+  --border-radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+  /* Z-Index Scale */
+  --z-sidebar: 90;
+  --z-header: 100;
+  --z-dropdown: 1000;
+  --z-modal: 1050;
+  --z-tooltip: 1070;
+  --z-toast: 1080;
+
+  /* ===== COMPONENT SIZING ===== */
+
+  /* Layout Dimensions */
+  --header-height: 3rem;        /* 48px */
+  --sidebar-width: 16rem;       /* 256px */
+  --sidebar-width-collapsed: 3rem; /* 48px */
+  --statusbar-height: 1.75rem;  /* 28px */
+  --toolbar-height: 2.5rem;     /* 40px */
+
+  /* Component Heights */
+  --input-height-sm: 2rem;      /* 32px */
+  --input-height-md: 2.5rem;    /* 40px */
+  --input-height-lg: 3rem;      /* 48px */
+  --button-height-sm: 2rem;     /* 32px */
+  --button-height-md: 2.5rem;   /* 40px */
+  --button-height-lg: 3rem;     /* 48px */
+
+  /* ===== ANIMATION & TRANSITIONS ===== */
+
+  /* Transition Durations */
+  --transition-fast: 150ms;
+  --transition-normal: 250ms;
+  --transition-slow: 350ms;
+
+  /* Transition Easings */
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Common Transitions */
+  --transition-colors: color var(--transition-fast) var(--ease-in-out),
+                      background-color var(--transition-fast) var(--ease-in-out),
+                      border-color var(--transition-fast) var(--ease-in-out);
+  --transition-transform: transform var(--transition-normal) var(--ease-in-out);
+  --transition-opacity: opacity var(--transition-normal) var(--ease-in-out);
+  --transition-shadow: box-shadow var(--transition-normal) var(--ease-in-out);
+}
+
+/* ===== DARK THEME OVERRIDES ===== */
+[data-theme="dark"] {
+  /* Background Colors */
+  --color-bg-primary: #1a202c;      /* Dark main background */
+  --color-bg-secondary: #2d3748;    /* Dark secondary background */
+  --color-bg-tertiary: #4a5568;     /* Dark tertiary background */
+  --color-bg-elevated: #2d3748;     /* Dark elevated surfaces */
+  --color-bg-overlay: rgba(0, 0, 0, 0.7); /* Dark modal overlay */
+
+  /* Text Colors */
+  --color-text-primary: #f7fafc;    /* Light text on dark */
+  --color-text-secondary: #e2e8f0;  /* Secondary light text */
+  --color-text-tertiary: #a0aec0;   /* Tertiary light text */
+  --color-text-inverse: #2d3748;    /* Dark text on light backgrounds */
+  --color-text-muted: #718096;      /* Muted light text */
+
+  /* UI Element Colors */
+  --color-border-primary: #4a5568;
+  --color-border-secondary: #718096;
+  --color-border-focus: #63b3ed;
+  --color-divider: #4a5568;
+
+  /* Interactive Colors */
+  --color-hover: #374151;
+  --color-active: #4a5568;
+  --color-focus: #63b3ed;
+  --color-focus-ring: rgba(99, 179, 237, 0.2);
+
+  /* Editor Specific Colors */
+  --color-editor-bg: #2d3748;
+  --color-editor-selection: #4a5568;
+  --color-editor-cursor: #f7fafc;
+  --color-editor-line-numbers: #a0aec0;
+  --color-editor-current-line: #374151;
+}
+
+/* ===== RESET & BASE STYLES ===== */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  line-height: var(--line-height-normal);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-family-ui);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Focus styles for accessibility */
+*:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+/* Smooth transitions for theme changes */
+* {
+  transition: var(--transition-colors);
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-secondary);
+  border-radius: var(--border-radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-tertiary);
+}
+
+/* Selection styling */
+::selection {
+  background-color: var(--color-editor-selection);
+  color: var(--color-text-primary);
+}

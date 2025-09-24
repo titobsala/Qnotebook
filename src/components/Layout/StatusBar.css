@@ -1,0 +1,392 @@
+/* StatusBar Component Styles */
+
+.status-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--statusbar-height);
+  background-color: var(--color-bg-secondary);
+  border-top: 1px solid var(--color-border-primary);
+  padding: 0 var(--spacing-md);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  z-index: 10;
+  flex-shrink: 0;
+}
+
+/* Status Sections */
+.status-left,
+.status-center,
+.status-right {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+}
+
+.status-left {
+  flex: 1;
+  justify-content: flex-start;
+  min-width: 0;
+}
+
+.status-center {
+  flex: 0 0 auto;
+}
+
+.status-right {
+  flex: 1;
+  justify-content: flex-end;
+  min-width: 0;
+}
+
+/* Status Groups */
+.status-group {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+/* Status Items */
+.status-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  white-space: nowrap;
+  min-width: 0;
+}
+
+.status-item .label {
+  color: var(--color-text-tertiary);
+  font-weight: var(--font-weight-medium);
+}
+
+.status-item .value {
+  color: var(--color-text-secondary);
+  font-family: var(--font-family-mono);
+}
+
+/* Specific Status Items */
+
+/* Document Status */
+.document-status .value {
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  font-family: var(--font-family-ui);
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.modified-indicator {
+  color: var(--color-warning);
+  font-size: var(--font-size-sm);
+  line-height: 1;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+/* File Path */
+.file-path .value {
+  color: var(--color-text-secondary);
+  font-family: var(--font-family-mono);
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Documents Count */
+.documents-count {
+  background-color: var(--color-bg-tertiary);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius-md);
+}
+
+/* Unsaved Changes */
+.unsaved-changes {
+  color: var(--color-warning);
+  background-color: var(--color-warning-bg);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius-md);
+  gap: var(--spacing-xs);
+}
+
+.unsaved-changes svg {
+  animation: pulse 2s infinite;
+}
+
+/* Statistics */
+.stats {
+  background-color: var(--color-bg-tertiary);
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--border-radius-lg);
+  gap: var(--spacing-lg);
+}
+
+.word-count .value,
+.char-count .value {
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+}
+
+.reading-time {
+  color: var(--color-text-tertiary);
+  font-style: italic;
+}
+
+/* File Info */
+.file-info {
+  gap: var(--spacing-md);
+}
+
+.file-size .value {
+  color: var(--color-text-secondary);
+}
+
+.encoding .value,
+.line-endings .value {
+  color: var(--color-text-tertiary);
+  font-size: var(--font-size-xs);
+}
+
+/* Theme Info */
+.theme-info {
+  background-color: var(--color-bg-tertiary);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius-md);
+  gap: var(--spacing-xs);
+  cursor: pointer;
+  transition: var(--transition-colors);
+}
+
+.theme-info:hover {
+  background-color: var(--color-hover);
+}
+
+.theme-indicator {
+  font-size: var(--font-size-sm);
+  line-height: 1;
+}
+
+.theme-info .value {
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  font-family: var(--font-family-ui);
+}
+
+/* Current Time */
+.current-time {
+  font-family: var(--font-family-mono);
+  color: var(--color-text-tertiary);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background-color: var(--color-bg-tertiary);
+  border-radius: var(--border-radius-md);
+}
+
+/* Interactive Elements */
+.status-item.clickable {
+  cursor: pointer;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius-md);
+  transition: var(--transition-colors);
+}
+
+.status-item.clickable:hover {
+  background-color: var(--color-hover);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .status-right .file-info {
+    display: none;
+  }
+
+  .status-center .stats {
+    gap: var(--spacing-md);
+  }
+
+  .char-count {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .status-bar {
+    padding: 0 var(--spacing-sm);
+    gap: var(--spacing-sm);
+  }
+
+  .status-left,
+  .status-center,
+  .status-right {
+    gap: var(--spacing-sm);
+  }
+
+  .file-path {
+    display: none;
+  }
+
+  .documents-count {
+    display: none;
+  }
+
+  .reading-time {
+    display: none;
+  }
+
+  .encoding,
+  .line-endings {
+    display: none;
+  }
+
+  .current-time {
+    display: none;
+  }
+
+  .status-item .label {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .status-center {
+    display: none;
+  }
+
+  .theme-info .value {
+    display: none;
+  }
+
+  .document-status .value {
+    max-width: 100px;
+  }
+}
+
+/* Theme-specific adjustments */
+[data-theme="dark"] .status-bar {
+  background-color: var(--color-bg-tertiary);
+}
+
+[data-theme="dark"] .stats,
+[data-theme="dark"] .documents-count,
+[data-theme="dark"] .theme-info,
+[data-theme="dark"] .current-time {
+  background-color: var(--color-bg-primary);
+}
+
+/* High contrast themes */
+[data-theme="high-contrast-light"] .status-bar,
+[data-theme="high-contrast-dark"] .status-bar {
+  border-top-width: 2px;
+}
+
+[data-theme="high-contrast-light"] .stats,
+[data-theme="high-contrast-dark"] .stats,
+[data-theme="high-contrast-light"] .documents-count,
+[data-theme="high-contrast-dark"] .documents-count,
+[data-theme="high-contrast-light"] .theme-info,
+[data-theme="high-contrast-dark"] .theme-info,
+[data-theme="high-contrast-light"] .current-time,
+[data-theme="high-contrast-dark"] .current-time {
+  border: 1px solid var(--color-border-primary);
+}
+
+/* Focus mode - hide status bar */
+[data-theme="focus"] .status-bar {
+  display: none;
+}
+
+/* Print mode - hide status bar */
+[data-theme="print-preview"] .status-bar {
+  display: none;
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .modified-indicator,
+  .unsaved-changes svg {
+    animation: none;
+  }
+}
+
+/* Focus management */
+.status-item.clickable:focus {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+/* Tooltip styles (if needed) */
+.status-item[title]:hover::after {
+  content: attr(title);
+  position: absolute;
+  bottom: calc(100% + var(--spacing-xs));
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--color-bg-elevated);
+  color: var(--color-text-primary);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius-md);
+  font-size: var(--font-size-xs);
+  white-space: nowrap;
+  z-index: var(--z-tooltip);
+  box-shadow: var(--shadow-md);
+  animation: tooltip-fade-in var(--transition-fast) var(--ease-out);
+}
+
+@keyframes tooltip-fade-in {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(0.25rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* Animation for smooth transitions */
+.status-bar,
+.status-item,
+.stats,
+.documents-count,
+.theme-info,
+.current-time {
+  transition: var(--transition-colors);
+}
+
+/* Loading state */
+.status-bar.loading {
+  opacity: 0.6;
+}
+
+/* Connection status (for future use) */
+.connection-status {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.connection-indicator {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-success);
+}
+
+.connection-indicator.disconnected {
+  background-color: var(--color-error);
+  animation: pulse 1s infinite;
+}
+
+.connection-indicator.connecting {
+  background-color: var(--color-warning);
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}

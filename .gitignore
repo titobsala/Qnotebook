@@ -5,6 +5,9 @@ node_modules/
 dist/
 build/
 
+Functionality_Improvements.md
+UI_UX_Improvements.md
+
 # Environment files
 .env
 .env.local

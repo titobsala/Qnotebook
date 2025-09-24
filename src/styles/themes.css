@@ -1,0 +1,121 @@
+/* Theme Definitions */
+
+/* Light Theme Variations */
+[data-theme="light-minimal"] {
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #f8f9fa;
+  --color-border-primary: #f0f0f0;
+  --color-text-primary: #1a1a1a;
+}
+
+[data-theme="light-warm"] {
+  --color-bg-primary: #fef9f5;
+  --color-bg-secondary: #faf5f0;
+  --color-bg-elevated: #ffffff;
+  --color-text-primary: #2d1b0e;
+  --color-text-secondary: #6b4423;
+}
+
+[data-theme="light-cool"] {
+  --color-bg-primary: #f8fafc;
+  --color-bg-secondary: #f1f5f9;
+  --color-bg-elevated: #ffffff;
+  --color-text-primary: #1e293b;
+  --color-text-secondary: #475569;
+}
+
+/* Dark Theme Variations */
+[data-theme="dark-professional"] {
+  --color-bg-primary: #0d1117;
+  --color-bg-secondary: #161b22;
+  --color-bg-tertiary: #21262d;
+  --color-bg-elevated: #161b22;
+  --color-text-primary: #f0f6fc;
+  --color-text-secondary: #c9d1d9;
+  --color-border-primary: #30363d;
+}
+
+[data-theme="dark-deep"] {
+  --color-bg-primary: #000000;
+  --color-bg-secondary: #0a0a0a;
+  --color-bg-tertiary: #1a1a1a;
+  --color-bg-elevated: #0a0a0a;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #cccccc;
+  --color-border-primary: #333333;
+}
+
+[data-theme="dark-nord"] {
+  --color-primary: #5e81ac;
+  --color-bg-primary: #2e3440;
+  --color-bg-secondary: #3b4252;
+  --color-bg-tertiary: #434c5e;
+  --color-bg-elevated: #3b4252;
+  --color-text-primary: #eceff4;
+  --color-text-secondary: #d8dee9;
+  --color-border-primary: #4c566a;
+  --color-success: #a3be8c;
+  --color-warning: #ebcb8b;
+  --color-error: #bf616a;
+  --color-info: #81a1c1;
+}
+
+/* High Contrast Themes for Accessibility */
+[data-theme="high-contrast-light"] {
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #f0f0f0;
+  --color-text-primary: #000000;
+  --color-text-secondary: #000000;
+  --color-primary: #0000ff;
+  --color-border-primary: #000000;
+  --color-focus: #ffff00;
+  --color-focus-ring: rgba(255, 255, 0, 0.5);
+}
+
+[data-theme="high-contrast-dark"] {
+  --color-bg-primary: #000000;
+  --color-bg-secondary: #1a1a1a;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #ffffff;
+  --color-primary: #00ffff;
+  --color-border-primary: #ffffff;
+  --color-focus: #ffff00;
+  --color-focus-ring: rgba(255, 255, 0, 0.5);
+}
+
+/* Specialty Themes */
+[data-theme="sepia"] {
+  --color-bg-primary: #f7f3e9;
+  --color-bg-secondary: #f0ead6;
+  --color-bg-elevated: #faf7ed;
+  --color-text-primary: #433f36;
+  --color-text-secondary: #6b5d47;
+  --color-border-primary: #e6dcc6;
+  --color-editor-bg: #faf7ed;
+  --color-primary: #8b4513;
+}
+
+[data-theme="focus"] {
+  /* Distraction-free theme with minimal UI elements */
+  --color-bg-primary: #f9f9f9;
+  --color-bg-secondary: transparent;
+  --color-border-primary: transparent;
+  --color-text-primary: #2d3748;
+  --color-text-secondary: #718096;
+  --header-height: 0;
+  --sidebar-width: 0;
+  --statusbar-height: 0;
+}
+
+/* Print-optimized theme */
+[data-theme="print-preview"] {
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #ffffff;
+  --color-bg-elevated: #ffffff;
+  --color-text-primary: #000000;
+  --color-text-secondary: #333333;
+  --color-border-primary: #cccccc;
+  --shadow-md: none;
+  --shadow-lg: none;
+  --shadow-xl: none;
+}

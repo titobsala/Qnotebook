@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, dialog } = require("electron");
+const { app, BrowserWindow, ipcMain, dialog, Menu } = require("electron");
 const path = require("path");
 const fs = require("fs");
 
@@ -9,12 +9,16 @@ const createWindow = () => {
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
     },
+    autoHideMenuBar: true, // Hide the native menu bar
   });
 
-  win.loadURL("http://localhost:5173");
+  win.loadURL("http://localhost:5174");
 };
 
 app.whenReady().then(() => {
+  // Remove the native menu bar completely
+  Menu.setApplicationMenu(null);
+
   // Handle a request to open a file
   ipcMain.handle("dialog:openFile", async () => {
     const { canceled, filePaths } = await dialog.showOpenDialog({
@@ -49,6 +53,45 @@ app.whenReady().then(() => {
       return savePath;
     }
     return null;
+  });
+
+  // Window control handlers
+  ipcMain.handle("window:minimize", () => {
+    const focusedWindow = BrowserWindow.getFocusedWindow();
+    if (focusedWindow) focusedWindow.minimize();
+  });
+
+  ipcMain.handle("window:maximize", () => {
+    const focusedWindow = BrowserWindow.getFocusedWindow();
+    if (focusedWindow) focusedWindow.maximize();
+  });
+
+  ipcMain.handle("window:restore", () => {
+    const focusedWindow = BrowserWindow.getFocusedWindow();
+    if (focusedWindow) focusedWindow.restore();
+  });
+
+  ipcMain.handle("window:close", () => {
+    const focusedWindow = BrowserWindow.getFocusedWindow();
+    if (focusedWindow) focusedWindow.close();
+  });
+
+  ipcMain.handle("window:toggleFullscreen", () => {
+    const focusedWindow = BrowserWindow.getFocusedWindow();
+    if (focusedWindow) {
+      const isFullScreen = focusedWindow.isFullScreen();
+      focusedWindow.setFullScreen(!isFullScreen);
+    }
+  });
+
+  ipcMain.handle("window:isMaximized", () => {
+    const focusedWindow = BrowserWindow.getFocusedWindow();
+    return focusedWindow ? focusedWindow.isMaximized() : false;
+  });
+
+  ipcMain.handle("window:isFullscreen", () => {
+    const focusedWindow = BrowserWindow.getFocusedWindow();
+    return focusedWindow ? focusedWindow.isFullScreen() : false;
   });
 
   createWindow();

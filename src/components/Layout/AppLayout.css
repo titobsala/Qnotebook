@@ -1,0 +1,301 @@
+/* AppLayout Component Styles */
+
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background-color: var(--color-bg-primary);
+  font-family: var(--font-family-ui);
+}
+
+/* App Body - Main content area */
+.app-body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Main Content Area */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: var(--color-bg-primary);
+  position: relative;
+  margin-left: var(--sidebar-width);
+  width: calc(100% - var(--sidebar-width));
+}
+
+/* Layout variations */
+
+/* No Sidebar Layout */
+.app-layout.no-sidebar .main-content {
+  margin-left: 0;
+  width: 100%;
+}
+
+/* Sidebar Collapsed */
+.app-layout.sidebar-collapsed .main-content {
+  margin-left: var(--sidebar-width-collapsed);
+  width: calc(100% - var(--sidebar-width-collapsed));
+}
+
+/* No Status Bar */
+.app-layout.no-statusbar .main-content {
+  padding-bottom: 0;
+}
+
+/* No Toolbar */
+.app-layout.no-toolbar .app-body {
+  height: calc(100vh - var(--statusbar-height));
+}
+
+.app-layout.no-toolbar.no-statusbar .app-body {
+  height: 100vh;
+}
+
+/* Compact Mode */
+.app-layout.compact-mode {
+  --header-height: 2.5rem;
+  --statusbar-height: 1.5rem;
+  --spacing-md: 0.5rem;
+  --spacing-lg: 0.75rem;
+}
+
+.app-layout.compact-mode .main-content {
+  font-size: var(--font-size-sm);
+}
+
+/* Responsive Design */
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .app-layout {
+    --sidebar-width: 14rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .app-layout {
+    --sidebar-width: 100vw;
+    --sidebar-width-collapsed: 0;
+  }
+
+  .app-layout .app-body {
+    position: relative;
+  }
+
+  /* Mobile sidebar behavior */
+  .app-layout.sidebar-collapsed .main-content {
+    margin-left: 0;
+  }
+
+  /* Overlay sidebar on mobile */
+  .app-layout:not(.sidebar-collapsed) .sidebar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    z-index: var(--z-modal);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .app-layout:not(.sidebar-collapsed)::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--color-bg-overlay);
+    z-index: calc(var(--z-modal) - 1);
+    backdrop-filter: blur(2px);
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+  .app-layout.compact-mode {
+    --header-height: 2rem;
+    --statusbar-height: 1.25rem;
+  }
+}
+
+/* Theme-specific adjustments */
+
+/* Dark Theme */
+[data-theme="dark"] .app-layout {
+  background-color: var(--color-bg-primary);
+}
+
+[data-theme="dark"] .main-content {
+  background-color: var(--color-bg-primary);
+}
+
+/* Focus Mode - Hide UI elements */
+[data-theme="focus"] .app-layout {
+  --header-height: 0;
+  --sidebar-width: 0;
+  --statusbar-height: 0;
+}
+
+[data-theme="focus"] .app-layout .header,
+[data-theme="focus"] .app-layout .sidebar,
+[data-theme="focus"] .app-layout .statusbar {
+  display: none;
+}
+
+[data-theme="focus"] .main-content {
+  margin: 0;
+  padding: var(--spacing-2xl);
+}
+
+/* High Contrast Themes */
+[data-theme="high-contrast-light"] .app-layout,
+[data-theme="high-contrast-dark"] .app-layout {
+  outline: 2px solid var(--color-border-primary);
+}
+
+[data-theme="high-contrast-light"] .main-content,
+[data-theme="high-contrast-dark"] .main-content {
+  outline: 1px solid var(--color-border-primary);
+  outline-offset: -1px;
+}
+
+/* Print Mode */
+[data-theme="print-preview"] .app-layout {
+  --header-height: 0;
+  --sidebar-width: 0;
+  --statusbar-height: 0;
+  background-color: white;
+}
+
+[data-theme="print-preview"] .app-layout .header,
+[data-theme="print-preview"] .app-layout .sidebar,
+[data-theme="print-preview"] .app-layout .statusbar {
+  display: none;
+}
+
+[data-theme="print-preview"] .main-content {
+  margin: 0;
+  padding: 1in;
+  max-width: 8.5in;
+  margin: 0 auto;
+}
+
+/* Animations and Transitions */
+.app-layout,
+.main-content {
+  transition: var(--transition-colors);
+}
+
+.main-content {
+  transition: margin-left var(--transition-normal) var(--ease-in-out),
+              var(--transition-colors);
+}
+
+/* Loading State */
+.app-layout.loading {
+  pointer-events: none;
+}
+
+.app-layout.loading::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--color-bg-overlay);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: calc(var(--z-modal) + 10);
+}
+
+.app-layout.loading::after {
+  content: 'Loading...';
+  color: var(--color-text-inverse);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-medium);
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .app-layout,
+  .main-content {
+    transition: none;
+  }
+}
+
+/* Focus management for keyboard navigation */
+.app-layout:focus-within .main-content {
+  outline: none;
+}
+
+/* Prevent text selection on layout elements */
+.app-layout > * {
+  user-select: none;
+}
+
+.main-content {
+  user-select: initial;
+}
+
+/* Z-index management */
+.app-layout .header {
+  z-index: 10;
+}
+
+.app-layout .sidebar {
+  z-index: 9;
+}
+
+.app-layout .main-content {
+  z-index: 1;
+}
+
+.app-layout .statusbar {
+  z-index: 10;
+}
+
+/* Electron-specific fixes */
+.electron-app .app-layout {
+  /* Ensure proper layout in Electron */
+  position: relative;
+  overflow: hidden;
+}
+
+.electron-app .main-content {
+  /* Force proper positioning in Electron */
+  position: relative;
+  z-index: 1;
+  margin-left: var(--sidebar-width);
+  width: calc(100% - var(--sidebar-width));
+  min-width: 0;
+  overflow: hidden;
+}
+
+.electron-app .app-layout.sidebar-collapsed .main-content {
+  margin-left: var(--sidebar-width-collapsed);
+  width: calc(100% - var(--sidebar-width-collapsed));
+}
+
+.electron-app .app-layout.no-sidebar .main-content {
+  margin-left: 0;
+  width: 100%;
+}
+
+.electron-app .sidebar {
+  /* Ensure sidebar doesn't overflow in Electron */
+  position: fixed;
+  left: 0;
+  top: var(--header-height);
+  height: calc(100vh - var(--header-height));
+  z-index: var(--z-sidebar);
+}
