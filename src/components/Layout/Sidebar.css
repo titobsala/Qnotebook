@@ -559,7 +559,7 @@
   left: 0;
   top: var(--header-height);
   height: calc(100vh - var(--header-height));
-  z-index: var(--z-sidebar);
+  z-index: 80; /* Lower than menu dropdowns */
 }
 
 .electron-app .sidebar.collapsed {

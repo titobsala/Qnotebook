@@ -8,6 +8,10 @@
   border-bottom: 1px solid var(--color-border-primary);
   position: relative;
   z-index: var(--z-header);
+  /* Create new stacking context */
+  isolation: isolate;
+  /* Ensure header creates proper stacking context */
+  transform: translateZ(0);
 }
 
 .header-content {
@@ -16,6 +20,8 @@
   width: 100%;
   height: 100%;
   padding: 0 var(--spacing-md);
+  position: relative;
+  z-index: var(--z-header);
 }
 
 /* Header Sections */
@@ -24,6 +30,8 @@
   align-items: center;
   gap: var(--spacing-md);
   flex-shrink: 0;
+  position: relative;
+  z-index: var(--z-header);
 }
 
 .header-center {
@@ -54,6 +62,9 @@
   color: var(--color-text-secondary);
   cursor: pointer;
   transition: var(--transition-colors);
+  position: relative;
+  z-index: calc(var(--z-header) + 1);
+  flex-shrink: 0;
 }
 
 .sidebar-toggle:hover {
@@ -71,6 +82,8 @@
   display: flex;
   align-items: center;
   gap: 0;
+  position: relative;
+  z-index: var(--z-header);
 }
 
 .menu-item {
@@ -116,6 +129,12 @@
   padding: var(--spacing-sm) 0;
   z-index: var(--z-dropdown);
   animation: menu-fade-in var(--transition-fast) var(--ease-out);
+  /* Ensure dropdown appears above everything */
+  transform: translateZ(0);
+  will-change: transform;
+  pointer-events: auto;
+  /* Force new stacking context */
+  isolation: isolate;
 }
 
 @keyframes menu-fade-in {
@@ -178,6 +197,7 @@
   bottom: 0;
   z-index: calc(var(--z-dropdown) - 1);
   background: transparent;
+  pointer-events: auto;
 }
 
 /* Document Title in Header */
@@ -278,6 +298,25 @@
   .header-right {
     gap: var(--spacing-xs);
   }
+}
+
+/* Electron-specific styles */
+.electron-app .header {
+  /* Ensure header stays above sidebar in Electron */
+  position: relative;
+  z-index: calc(var(--z-header) + 20);
+  /* Create new stacking context */
+  isolation: isolate;
+}
+
+/* Ensure header is always above sidebar */
+.header {
+  z-index: calc(var(--z-header) + 20) !important;
+}
+
+.electron-app .menu-dropdown {
+  /* Ensure menu dropdowns appear above everything in Electron */
+  z-index: calc(var(--z-modal) + 50); /* Even higher than modals */
 }
 
 /* Theme-specific styles */

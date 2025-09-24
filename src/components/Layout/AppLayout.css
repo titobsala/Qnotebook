@@ -269,12 +269,13 @@
   /* Ensure proper layout in Electron */
   position: relative;
   overflow: hidden;
+  z-index: 1; /* Lower than header */
 }
 
 .electron-app .main-content {
   /* Force proper positioning in Electron */
   position: relative;
-  z-index: 1;
+  z-index: 5; /* Lower than sidebar and header */
   margin-left: var(--sidebar-width);
   width: calc(100% - var(--sidebar-width));
   min-width: 0;
