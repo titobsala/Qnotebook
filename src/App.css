@@ -1,0 +1,39 @@
+body {
+    margin: 0;
+    font-family:
+        -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: #f0f2f5;
+}
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+}
+
+.toolbar {
+    /* Changed from #toolbar */
+    padding: 8px;
+    border-bottom: 1px solid #d1d5db;
+    background-color: #f9fafb;
+}
+
+.editor-container {
+    /* Changed from #editor-container */
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+.editor {
+    /* Changed from #editor */
+    width: 8.5in;
+    min-height: 11in;
+    padding: 1in;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: none; /* Combine the border rule here */
+}
