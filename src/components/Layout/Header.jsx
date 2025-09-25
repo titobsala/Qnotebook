@@ -224,7 +224,7 @@ const Header = ({ onToggleSidebar, isSidebarCollapsed }) => {
   // Help menu handlers
   const handleAbout = () => {
     const version = '1.0.0'; // You can get this from package.json
-    alert(`QuillDE v${version}\nA minimalist desktop editor built with React, Electron, and Quill.`);
+    alert(`Qnotebook v${version}\nA minimalist desktop editor built with React, Electron, and Quill.`);
     setShowHelpMenu(false);
   };
 
@@ -267,13 +267,13 @@ Other:
 
   const handleDocumentation = () => {
     // Open documentation in browser
-    window.open('https://github.com/yourusername/quillde', '_blank');
+    window.open('https://github.com/titobsala/qnotebook', '_blank');
     setShowHelpMenu(false);
   };
 
   const handleReportIssue = () => {
     // Open GitHub issues in browser
-    window.open('https://github.com/yourusername/quillde/issues/new', '_blank');
+    window.open('https://github.com/titobsala/qnotebook/issues/new', '_blank');
     setShowHelpMenu(false);
   };
 

@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-QuillDE is a minimalist desktop editor built with Electron and React. It provides a rich text editing experience using Quill.js with file import/export capabilities for Markdown, HTML, and text files.
+Qnotebook is a minimalist desktop editor built with Electron and React. It provides a rich text editing experience using Quill.js with file import/export capabilities for Markdown, HTML, and text files.
 
 ## Architecture
 

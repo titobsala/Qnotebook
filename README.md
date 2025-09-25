@@ -1,6 +1,6 @@
-# QuillDE
+# Qnotebook
 
-A minimalist desktop editor built with React, Electron, and Quill.js. QuillDE provides a clean, distraction-free writing environment with modern features and customizable themes.
+A minimalist desktop editor built with React, Electron, and Quill.js. Qnotebook provides a clean, distraction-free writing environment with modern features and customizable themes.
 
 ## Features
 
@@ -30,8 +30,8 @@ A minimalist desktop editor built with React, Electron, and Quill.js. QuillDE pr
 ### Clone and Install
 
 ```bash
-git clone https://github.com/titobsala/QuillDE.git
-cd QuillDE
+git clone https://github.com/titobsala/Qnotebook.git
+cd Qnotebook
 npm install
 ```
 
@@ -96,7 +96,7 @@ npm run electron:build
 
 ### Theme Customization
 
-QuillDE includes multiple built-in themes:
+Qnotebook includes multiple built-in themes:
 - **Light** - Clean light theme (default)
 - **Dark** - Dark theme for low-light environments
 - **Blue** - Professional blue theme
@@ -110,7 +110,7 @@ Access themes via the theme toggle button in the header or the sidebar theme pan
 
 ## Architecture
 
-QuillDE follows a modular architecture with clear separation of concerns:
+Qnotebook follows a modular architecture with clear separation of concerns:
 
 ```
 src/
@@ -150,7 +150,7 @@ src/
 ## Project Structure
 
 ```
-QuillDE/
+Qnotebook/
 ├── electron/           # Electron main process files
 ├── public/             # Static assets
 ├── src/
@@ -192,7 +192,7 @@ See [CHANGELOG.md](CHANGELOG.md) for a detailed history of changes.
 
 ## Support
 
-- 🐛 [Report Issues](https://github.com/titobsala/QuillDE/issues)
+- 🐛 [Report Issues](https://github.com/titobsala/Qnotebook/issues)
 
 
 ## Acknowledgments

@@ -1,5 +1,5 @@
 {
-  "name": "quillde",
+  "name": "qnotebook",
   "version": "1.0.0",
   "description": "A minimalist desktop editor.",
   "main": "electron/main.js",

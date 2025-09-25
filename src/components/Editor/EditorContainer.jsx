@@ -26,7 +26,7 @@ const EditorContainer = () => {
       <div className="editor-container">
         <div className="editor-placeholder">
           <div className="placeholder-content">
-            <h3>Welcome to QuillDE</h3>
+            <h3>Welcome to Qnotebook</h3>
             <p>Create a new document or open an existing one to start writing.</p>
             <div className="placeholder-actions">
               <button className="btn btn-primary" onClick={handleNewDocument}>

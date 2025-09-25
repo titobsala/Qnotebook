@@ -183,11 +183,11 @@ export const DEFAULT_SETTINGS = {
 
 // Application Metadata
 export const APP_INFO = {
-  name: 'QuillDE',
+  name: 'Qnotebook',
   version: '1.0.0',
   description: 'A minimalist desktop editor',
   author: '',
-  homepage: 'https://github.com/titobsala/QuillDE'
+  homepage: 'https://github.com/titobsala/Qnotebook'
 };
 
 // File Extensions and Types
@@ -287,13 +287,13 @@ export const KEYBOARD_SHORTCUTS = {
 
 // Local Storage Keys
 export const STORAGE_KEYS = {
-  THEME: 'quillde-theme',
-  SETTINGS: 'quillde-settings',
-  RECENT_FILES: 'quillde-recent-files',
-  WINDOW_STATE: 'quillde-window-state',
-  CUSTOM_THEMES: 'quillde-custom-themes',
-  WORKSPACES: 'quillde-workspaces',
-  EDITOR_STATE: 'quillde-editor-state'
+  THEME: 'qnotebook-theme',
+  SETTINGS: 'qnotebook-settings',
+  RECENT_FILES: 'qnotebook-recent-files',
+  WINDOW_STATE: 'qnotebook-window-state',
+  CUSTOM_THEMES: 'qnotebook-custom-themes',
+  WORKSPACES: 'qnotebook-workspaces',
+  EDITOR_STATE: 'qnotebook-editor-state'
 };
 
 // CSS Custom Property Names (for dynamic theme updates)
