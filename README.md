@@ -7,12 +7,10 @@ A minimalist desktop editor built with React, Electron, and Quill.js. QuillDE pr
 - 🖊️ **Rich Text Editing** - Powered by Quill.js for a smooth writing experience
 - 🎨 **Multiple Themes** - 10+ built-in themes including light, dark, and high-contrast modes
 - 📁 **Document Management** - Create, open, save, and manage multiple documents
-- 🔍 **Find & Replace** - Built-in search functionality
 - ⌨️ **Keyboard Shortcuts** - Full keyboard navigation support
 - 💾 **Auto-save** - Never lose your work with automatic saving
 - 🖥️ **Cross-Platform** - Available as both desktop app (Electron) and web app
-- 📱 **Responsive Design** - Works on all screen sizes
-- ♿ **Accessibility** - Full keyboard navigation and screen reader support
+
 
 ## Tech Stack
 
@@ -194,9 +192,8 @@ See [CHANGELOG.md](CHANGELOG.md) for a detailed history of changes.
 
 ## Support
 
-- 📖 [Documentation](https://github.com/titobsala/QuillDE)
 - 🐛 [Report Issues](https://github.com/titobsala/QuillDE/issues)
-- 💬 [Discussions](https://github.com/titobsala/QuillDE/discussions)
+
 
 ## Acknowledgments
 
