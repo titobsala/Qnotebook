@@ -1,29 +1,70 @@
 {
   "name": "qnotebook",
+  "productName": "qnotebook",
   "version": "1.0.0",
-  "description": "A minimalist desktop editor.",
+  "description": "My Electron application description",
   "main": "electron/main.js",
+  "homepage": "./",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "vite",
     "build": "vite build",
-    "electron": "electron . --no-sandbox",
-    "start": "concurrently \"npm run dev\" \"npm run electron\""
+    "preview": "vite preview",
+    "electron": "electron-forge start -- --no-sandbox",
+    "electron-dev": "concurrently \"npm run dev\" \"wait-on http://localhost:5174 && npm run electron\"",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish",
+    "lint": "echo \"No linting configured\""
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "concurrently": "^9.2.1",
-    "electron": "^38.1.2",
-    "vite": "^7.1.7"
+  "author": "tito-sala",
+  "license": "MIT",
+  "config": {
+    "forge": {
+      "make_targets": {
+        "win32": [
+          "squirrel"
+        ],
+        "darwin": [
+          "zip"
+        ],
+        "linux": [
+          "deb",
+          "rpm"
+        ]
+      },
+      "electronPackagerConfig": {
+        "packageManager": "npm",
+        "asar": true
+      },
+      "electronWinstallerConfig": {
+        "name": "qnotebook"
+      },
+      "electronInstallerDebian": {},
+      "electronInstallerRedhat": {},
+      "github_repository": {
+        "owner": "",
+        "name": ""
+      },
+      "windowsStoreConfig": {
+        "packageName": "",
+        "name": "qnotebook"
+      }
+    }
   },
   "dependencies": {
-    "@vitejs/plugin-react": "^5.0.3",
-    "marked": "^16.3.0",
-    "quill": "^2.0.3",
-    "react": "^19.1.1",
-    "react-dom": "^19.1.1",
-    "turndown": "^7.2.1"
+    "electron-squirrel-startup": "^1.0.1",
+    "quill": "^1.3.7"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.1",
+    "concurrently": "^8.2.2",
+    "electron": "^28.0.0",
+    "electron-forge": "^5.2.4",
+    "electron-prebuilt-compile": "8.2.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "vite": "^5.0.0",
+    "wait-on": "^7.2.0"
   }
 }
