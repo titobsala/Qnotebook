@@ -4,27 +4,27 @@ export const THEMES = {
   // Light Themes
   LIGHT: {
     id: 'light',
-    name: 'Light',
+    name: 'Classic Light',
     type: 'light',
     description: 'Clean light theme with off-white background'
   },
   LIGHT_MINIMAL: {
     id: 'light-minimal',
-    name: 'Minimal Light',
+    name: 'Minimal White',
     type: 'light',
     description: 'Pure white minimal theme'
   },
   LIGHT_WARM: {
     id: 'light-warm',
-    name: 'Warm Light',
+    name: 'Soft Cream',
     type: 'light',
-    description: 'Warm beige-toned light theme'
+    description: 'Warm cream-toned theme for comfortable reading'
   },
-  LIGHT_COOL: {
-    id: 'light-cool',
-    name: 'Cool Light',
+  GITHUB_LIGHT: {
+    id: 'github-light',
+    name: 'GitHub Light',
     type: 'light',
-    description: 'Cool blue-toned light theme'
+    description: 'GitHub-inspired light theme'
   },
 
   // Dark Themes
@@ -51,6 +51,12 @@ export const THEMES = {
     name: 'Nord Dark',
     type: 'dark',
     description: 'Arctic-inspired dark theme'
+  },
+  DRACULA: {
+    id: 'dracula',
+    name: 'Dracula',
+    type: 'dark',
+    description: 'Popular purple-accented dark theme'
   },
 
   // Accessibility Themes
@@ -84,6 +90,13 @@ export const THEMES = {
     description: 'Distraction-free writing environment',
     specialty: true
   },
+  EYE_COMFORT: {
+    id: 'eye-comfort',
+    name: 'Eye Comfort',
+    type: 'light',
+    description: 'Reduced blue light theme for extended reading',
+    specialty: true
+  },
   PRINT_PREVIEW: {
     id: 'print-preview',
     name: 'Print Preview',
@@ -99,13 +112,14 @@ export const THEME_COLLECTIONS = {
     THEMES.LIGHT,
     THEMES.LIGHT_MINIMAL,
     THEMES.LIGHT_WARM,
-    THEMES.LIGHT_COOL
+    THEMES.GITHUB_LIGHT
   ],
   DARK_THEMES: [
     THEMES.DARK,
     THEMES.DARK_PROFESSIONAL,
     THEMES.DARK_DEEP,
-    THEMES.DARK_NORD
+    THEMES.DARK_NORD,
+    THEMES.DRACULA
   ],
   ACCESSIBILITY_THEMES: [
     THEMES.HIGH_CONTRAST_LIGHT,
@@ -113,7 +127,8 @@ export const THEME_COLLECTIONS = {
   ],
   SPECIALTY_THEMES: [
     THEMES.SEPIA,
-    THEMES.FOCUS
+    THEMES.FOCUS,
+    THEMES.EYE_COMFORT
   ]
 };
 

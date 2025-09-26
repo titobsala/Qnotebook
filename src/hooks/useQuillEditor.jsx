@@ -16,7 +16,8 @@ export const useQuillEditor = (documentId) => {
     getQuillInstance
   } = useEditor();
   const { getCurrentTheme } = useTheme();
-  const { editor: editorSettings } = useSettings();
+  const { settings } = useSettings();
+  const editorSettings = settings?.editor || {};
 
   // Initialize Quill editor
   useEffect(() => {
@@ -54,9 +55,11 @@ export const useQuillEditor = (documentId) => {
       debug: process.env.NODE_ENV === 'development' ? 'info' : 'warn'
     };
 
-    // Apply editor settings
+    // Apply editor settings (note: no toolbar since theme: false)
+    // Word wrap is handled by CSS, not Quill toolbar
     if (editorSettings.wordWrap === false) {
-      quillConfig.modules.toolbar.container.push(['wrap']);
+      // Apply CSS class for no word wrap instead of toolbar
+      quillConfig.bounds = editorRef.current;
     }
 
     try {

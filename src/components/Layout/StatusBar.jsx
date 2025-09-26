@@ -1,6 +1,5 @@
 import React from 'react';
 import { useEditor } from '../../contexts/EditorContext.jsx';
-import { useTheme } from '../../contexts/ThemeContext.jsx';
 import './StatusBar.css';
 
 const StatusBar = () => {
@@ -10,10 +9,9 @@ const StatusBar = () => {
     documents,
     hasUnsavedChanges
   } = useEditor();
-  const { getCurrentTheme } = useTheme();
+
 
   const activeDocument = getActiveDocument();
-  const currentTheme = getCurrentTheme();
   const documentStats = activeDocument ? getDocumentStats(activeDocument.id) : null;
 
   const formatReadingTime = (minutes) => {
@@ -116,13 +114,6 @@ const StatusBar = () => {
           </div>
         )}
 
-        {/* Theme Info */}
-        <div className="status-item theme-info">
-          <span className="theme-indicator">
-            {currentTheme.type === 'dark' ? '🌙' : '☀️'}
-          </span>
-          <span className="value">{currentTheme.name}</span>
-        </div>
 
         {/* Current Time */}
         <div className="status-item current-time">

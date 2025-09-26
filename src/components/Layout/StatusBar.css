@@ -158,6 +158,8 @@
   padding: var(--spacing-xs) var(--spacing-sm);
   border-radius: var(--border-radius-md);
   gap: var(--spacing-xs);
+  align-items: center;
+  display: flex;
   cursor: pointer;
   transition: var(--transition-colors);
 }
@@ -172,9 +174,10 @@
 }
 
 .theme-info .value {
-  font-weight: var(--font-weight-medium);
-  color: var(--color-text-primary);
-  font-family: var(--font-family-ui);
+  color: var(--color-text-secondary);
+  font-family: var(--font-family-mono);
+  white-space: nowrap;
+  font-size: var(--font-size-xs);
 }
 
 /* Current Time */
@@ -277,6 +280,11 @@
   background-color: var(--color-bg-primary);
 }
 
+/* Dark theme theme indicator */
+[data-theme="dark"] .theme-info .value {
+  color: var(--color-text-secondary);
+}
+
 /* High contrast themes */
 [data-theme="high-contrast-light"] .status-bar,
 [data-theme="high-contrast-dark"] .status-bar {
@@ -292,6 +300,12 @@
 [data-theme="high-contrast-light"] .current-time,
 [data-theme="high-contrast-dark"] .current-time {
   border: 1px solid var(--color-border-primary);
+}
+
+/* High contrast theme indicators */
+[data-theme="high-contrast-light"] .theme-info .value,
+[data-theme="high-contrast-dark"] .theme-info .value {
+  color: var(--color-text-primary);
 }
 
 /* Focus mode - hide status bar */

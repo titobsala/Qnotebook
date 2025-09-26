@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useTheme } from '../../contexts/ThemeContext.jsx';
 import { useEditor } from '../../contexts/EditorContext.jsx';
-import ThemeToggle from '../UI/ThemeToggle.jsx';
+import Settings from '../Settings/Settings.jsx';
 import useElectron from '../../hooks/useElectron.jsx';
 import './Header.css';
 
@@ -22,6 +22,7 @@ const Header = ({ onToggleSidebar, isSidebarCollapsed }) => {
   const [showViewMenu, setShowViewMenu] = useState(false);
   const [showWindowMenu, setShowWindowMenu] = useState(false);
   const [showHelpMenu, setShowHelpMenu] = useState(false);
+  const [showSettings, setShowSettings] = useState(false);
   const [isMaximized, setIsMaximized] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
 
@@ -508,38 +509,18 @@ Other:
             </div>
           )}
         </div>
-
-        {/* Right section - Theme toggle and actions */}
-        <div className="header-right">
-          <div className="header-actions">
-            {hasUnsavedChanges() && (
-              <div className="unsaved-indicator" title="You have unsaved changes">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                  <circle cx="12" cy="12" r="10"/>
-                </svg>
-              </div>
-            )}
-
-            <ThemeToggle />
-
-            <button
-              className="settings-button"
-              title="Settings"
-              aria-label="Open Settings"
-            >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <circle cx="12" cy="12" r="3"/>
-                <path d="M12 1v6m0 6v6m11-7h-6m-6 0H1"/>
-              </svg>
-            </button>
-          </div>
-        </div>
       </div>
 
       {/* Backdrop to close menus when clicking outside */}
       {(showFileMenu || showEditMenu || showViewMenu || showWindowMenu || showHelpMenu) && (
         <div className="menu-backdrop" onClick={closeAllMenus} />
       )}
+
+      {/* Settings Modal */}
+      <Settings
+        isOpen={showSettings}
+        onClose={() => setShowSettings(false)}
+      />
     </header>
   );
 };

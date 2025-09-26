@@ -6,8 +6,16 @@ import StatusBar from './StatusBar.jsx';
 import './AppLayout.css';
 
 const AppLayout = ({ children }) => {
-  const { layout } = useSettings();
+  const { settings } = useSettings();
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+
+  // Use default layout settings if not loaded yet
+  const layout = settings?.layout || {
+    showSidebar: true,
+    showStatusBar: true,
+    showToolbar: true,
+    compactMode: false
+  };
 
   const toggleSidebar = () => {
     setIsSidebarCollapsed(!isSidebarCollapsed);

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useQuillEditor } from '../../hooks/useQuillEditor.jsx';
 import { useEditor } from '../../contexts/EditorContext.jsx';
-import 'quill/dist/quill.snow.css';
+import 'quill/dist/quill.core.css';
 import './QuillEditor.css';
 
 const QuillEditor = ({ documentId, className = '', ...props }) => {

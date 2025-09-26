@@ -1,77 +1,59 @@
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
-import { DEFAULT_SETTINGS, STORAGE_KEYS, VALIDATION } from '../utils/constants.js';
+import { DEFAULT_SETTINGS, STORAGE_KEYS } from '../utils/constants.js';
 
 // Initial state from constants
 const initialState = {
-  ...DEFAULT_SETTINGS,
-  isLoaded: false,
-  hasUnsavedChanges: false
+  settings: DEFAULT_SETTINGS,
+  isLoading: false,
+  error: null
 };
 
 // Action types
 const SETTINGS_ACTIONS = {
   LOAD_SETTINGS: 'LOAD_SETTINGS',
-  UPDATE_SETTING: 'UPDATE_SETTING',
-  UPDATE_NESTED_SETTING: 'UPDATE_NESTED_SETTING',
+  UPDATE_SETTINGS: 'UPDATE_SETTINGS',
   RESET_SETTINGS: 'RESET_SETTINGS',
-  RESET_SECTION: 'RESET_SECTION',
-  MARK_SAVED: 'MARK_SAVED',
-  MARK_UNSAVED: 'MARK_UNSAVED'
+  SET_LOADING: 'SET_LOADING',
+  SET_ERROR: 'SET_ERROR'
 };
 
-// Settings reducer
+// Reducer
 const settingsReducer = (state, action) => {
   switch (action.type) {
     case SETTINGS_ACTIONS.LOAD_SETTINGS:
       return {
         ...state,
-        ...action.payload,
-        isLoaded: true,
-        hasUnsavedChanges: false
+        settings: { ...DEFAULT_SETTINGS, ...action.payload },
+        isLoading: false,
+        error: null
       };
 
-    case SETTINGS_ACTIONS.UPDATE_SETTING:
+    case SETTINGS_ACTIONS.UPDATE_SETTINGS:
       return {
         ...state,
-        [action.payload.key]: action.payload.value,
-        hasUnsavedChanges: true
-      };
-
-    case SETTINGS_ACTIONS.UPDATE_NESTED_SETTING:
-      const { section, key, value } = action.payload;
-      return {
-        ...state,
-        [section]: {
-          ...state[section],
-          [key]: value
-        },
-        hasUnsavedChanges: true
+        settings: {
+          ...state.settings,
+          ...action.payload
+        }
       };
 
     case SETTINGS_ACTIONS.RESET_SETTINGS:
       return {
-        ...DEFAULT_SETTINGS,
-        isLoaded: true,
-        hasUnsavedChanges: true
+        ...state,
+        settings: DEFAULT_SETTINGS
       };
 
-    case SETTINGS_ACTIONS.RESET_SECTION:
+    case SETTINGS_ACTIONS.SET_LOADING:
       return {
         ...state,
-        [action.payload]: DEFAULT_SETTINGS[action.payload],
-        hasUnsavedChanges: true
+        isLoading: action.payload
       };
 
-    case SETTINGS_ACTIONS.MARK_SAVED:
+    case SETTINGS_ACTIONS.SET_ERROR:
       return {
         ...state,
-        hasUnsavedChanges: false
-      };
-
-    case SETTINGS_ACTIONS.MARK_UNSAVED:
-      return {
-        ...state,
-        hasUnsavedChanges: true
+        error: action.payload,
+        isLoading: false
       };
 
     default:
@@ -90,26 +72,27 @@ export const SettingsProvider = ({ children }) => {
   useEffect(() => {
     const loadSettings = () => {
       try {
+        dispatch({ type: SETTINGS_ACTIONS.SET_LOADING, payload: true });
+
         const savedSettings = localStorage.getItem(STORAGE_KEYS.SETTINGS);
         if (savedSettings) {
           const parsedSettings = JSON.parse(savedSettings);
-
-          // Merge with default settings to ensure all properties exist
-          const mergedSettings = mergeWithDefaults(parsedSettings, DEFAULT_SETTINGS);
-
           dispatch({
             type: SETTINGS_ACTIONS.LOAD_SETTINGS,
-            payload: mergedSettings
+            payload: parsedSettings
           });
         } else {
-          // No saved settings, use defaults
           dispatch({
             type: SETTINGS_ACTIONS.LOAD_SETTINGS,
             payload: DEFAULT_SETTINGS
           });
         }
       } catch (error) {
-        console.warn('Failed to load settings, using defaults:', error);
+        console.error('Failed to load settings:', error);
+        dispatch({
+          type: SETTINGS_ACTIONS.SET_ERROR,
+          payload: 'Failed to load settings'
+        });
         dispatch({
           type: SETTINGS_ACTIONS.LOAD_SETTINGS,
           payload: DEFAULT_SETTINGS
@@ -120,178 +103,90 @@ export const SettingsProvider = ({ children }) => {
     loadSettings();
   }, []);
 
-  // Auto-save settings when they change
+  // Save settings to localStorage whenever they change
   useEffect(() => {
-    if (!state.isLoaded || !state.hasUnsavedChanges) return;
-
-    const saveTimer = setTimeout(() => {
-      saveSettings();
-    }, 1000); // Debounce saves by 1 second
-
-    return () => clearTimeout(saveTimer);
-  }, [state]);
-
-  // Deep merge function for settings
-  const mergeWithDefaults = (saved, defaults) => {
-    const merged = { ...defaults };
-
-    Object.keys(saved).forEach(key => {
-      if (typeof saved[key] === 'object' && saved[key] !== null && !Array.isArray(saved[key])) {
-        merged[key] = { ...defaults[key], ...saved[key] };
-      } else {
-        merged[key] = saved[key];
-      }
-    });
-
-    return merged;
-  };
-
-  // Save settings to localStorage
-  const saveSettings = async () => {
-    try {
-      const settingsToSave = { ...state };
-      delete settingsToSave.isLoaded;
-      delete settingsToSave.hasUnsavedChanges;
-
-      localStorage.setItem(STORAGE_KEYS.SETTINGS, JSON.stringify(settingsToSave));
-
-      dispatch({ type: SETTINGS_ACTIONS.MARK_SAVED });
-
-      // Notify Electron main process if available
-      if (window.electronAPI && window.electronAPI.saveSettings) {
-        await window.electronAPI.saveSettings(settingsToSave);
-      }
-
-      return true;
-    } catch (error) {
-      console.error('Failed to save settings:', error);
-      return false;
-    }
-  };
-
-  // Update a top-level setting
-  const updateSetting = (key, value) => {
-    if (!key || value === undefined) {
-      console.warn('Invalid setting key or value');
-      return;
-    }
-
-    dispatch({
-      type: SETTINGS_ACTIONS.UPDATE_SETTING,
-      payload: { key, value }
-    });
-  };
-
-  // Update a nested setting (e.g., editor.fontSize)
-  const updateNestedSetting = (section, key, value) => {
-    if (!section || !key || value === undefined) {
-      console.warn('Invalid nested setting parameters');
-      return;
-    }
-
-    dispatch({
-      type: SETTINGS_ACTIONS.UPDATE_NESTED_SETTING,
-      payload: { section, key, value }
-    });
-  };
-
-  // Update multiple settings at once
-  const updateMultipleSettings = (settings) => {
-    Object.entries(settings).forEach(([key, value]) => {
-      if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
-        // Handle nested objects
-        Object.entries(value).forEach(([nestedKey, nestedValue]) => {
-          updateNestedSetting(key, nestedKey, nestedValue);
+    if (!state.isLoading && !state.error) {
+      try {
+        localStorage.setItem(STORAGE_KEYS.SETTINGS, JSON.stringify(state.settings));
+      } catch (error) {
+        console.error('Failed to save settings:', error);
+        dispatch({
+          type: SETTINGS_ACTIONS.SET_ERROR,
+          payload: 'Failed to save settings'
         });
-      } else {
-        updateSetting(key, value);
       }
+    }
+  }, [state.settings, state.isLoading, state.error]);
+
+  // Update settings
+  const updateSettings = (newSettings) => {
+    dispatch({
+      type: SETTINGS_ACTIONS.UPDATE_SETTINGS,
+      payload: newSettings
     });
   };
 
-  // Reset all settings to defaults
-  const resetAllSettings = () => {
+  // Reset settings to defaults
+  const resetSettings = () => {
     dispatch({ type: SETTINGS_ACTIONS.RESET_SETTINGS });
   };
 
-  // Reset a specific section to defaults
-  const resetSection = (section) => {
-    if (!DEFAULT_SETTINGS[section]) {
-      console.warn(`Settings section "${section}" not found`);
-      return;
-    }
-
-    dispatch({
-      type: SETTINGS_ACTIONS.RESET_SECTION,
-      payload: section
-    });
-  };
-
-  // Get a setting value with optional default
-  const getSetting = (key, defaultValue = null) => {
-    const value = key.includes('.')
-      ? getNestedSetting(key)
-      : state[key];
-
-    return value !== undefined ? value : defaultValue;
-  };
-
-  // Get a nested setting value (e.g., "editor.fontSize")
-  const getNestedSetting = (path) => {
+  // Get specific setting value
+  const getSetting = (path) => {
     const keys = path.split('.');
-    let current = state;
+    let value = state.settings;
 
     for (const key of keys) {
-      if (current && typeof current === 'object' && key in current) {
-        current = current[key];
+      if (value && typeof value === 'object') {
+        value = value[key];
       } else {
         return undefined;
       }
     }
 
-    return current;
+    return value;
   };
 
-  // Validate a setting value
-  const validateSetting = (key, value) => {
-    try {
-      switch (key) {
-        case 'editor.fontSize':
-          return value >= VALIDATION.FONT_SIZE.MIN &&
-                 value <= VALIDATION.FONT_SIZE.MAX;
+  // Update specific setting value
+  const updateSetting = (path, value) => {
+    const keys = path.split('.');
+    const lastKey = keys.pop();
+    let current = { ...state.settings };
+    let target = current;
 
-        case 'files.maxRecentFiles':
-          return Number.isInteger(value) && value > 0 && value <= 100;
-
-        case 'files.autoSaveDelay':
-          return Number.isInteger(value) && value >= 500; // Min 500ms
-
-        case 'performance.maxDocumentSize':
-          return Number.isInteger(value) && value > 0 && value <= 1000; // Max 1GB
-
-        default:
-          return true; // Allow by default
+    // Navigate to the parent object
+    for (const key of keys) {
+      if (!target[key] || typeof target[key] !== 'object') {
+        target[key] = {};
       }
+      target = target[key];
+    }
+
+    // Set the value
+    target[lastKey] = value;
+
+    dispatch({
+      type: SETTINGS_ACTIONS.UPDATE_SETTINGS,
+      payload: current
+    });
+  };
+
+  // Export settings
+  const exportSettings = () => {
+    try {
+      const exportData = {
+        settings: state.settings,
+        exportedAt: new Date().toISOString(),
+        version: '1.0.0'
+      };
+      return JSON.stringify(exportData, null, 2);
     } catch (error) {
-      console.warn(`Validation failed for ${key}:`, error);
-      return false;
+      console.error('Failed to export settings:', error);
+      throw new Error('Failed to export settings');
     }
   };
 
-  // Export settings as JSON
-  const exportSettings = () => {
-    const settingsToExport = { ...state };
-    delete settingsToExport.isLoaded;
-    delete settingsToExport.hasUnsavedChanges;
-
-    return JSON.stringify({
-      settings: settingsToExport,
-      exportedAt: new Date().toISOString(),
-      version: '1.0.0'
-    }, null, 2);
-  };
-
-  // Import settings from JSON
+  // Import settings
   const importSettings = (settingsJson) => {
     try {
       const importData = JSON.parse(settingsJson);
@@ -300,75 +195,80 @@ export const SettingsProvider = ({ children }) => {
         throw new Error('Invalid settings format');
       }
 
-      const mergedSettings = mergeWithDefaults(importData.settings, DEFAULT_SETTINGS);
+      // Merge with default settings to ensure all required fields exist
+      const mergedSettings = {
+        ...DEFAULT_SETTINGS,
+        ...importData.settings
+      };
 
       dispatch({
-        type: SETTINGS_ACTIONS.LOAD_SETTINGS,
+        type: SETTINGS_ACTIONS.UPDATE_SETTINGS,
         payload: mergedSettings
       });
 
       return true;
     } catch (error) {
       console.error('Failed to import settings:', error);
-      throw error;
+      throw new Error('Failed to import settings: ' + error.message);
     }
   };
 
-  // Get settings for a specific section
-  const getSection = (sectionName) => {
-    return state[sectionName] || {};
-  };
+  // Apply settings to DOM (for CSS custom properties)
+  useEffect(() => {
+    const applySettingsToDOM = () => {
+      const root = document.documentElement;
 
-  // Check if settings have been modified from defaults
-  const hasChangesFromDefaults = () => {
-    return JSON.stringify(state) !== JSON.stringify({
-      ...DEFAULT_SETTINGS,
-      isLoaded: state.isLoaded,
-      hasUnsavedChanges: state.hasUnsavedChanges
-    });
-  };
+      // Apply appearance settings
+      if (state.settings.appearance?.fontSize) {
+        root.style.setProperty('--font-size-ui-base', `${state.settings.appearance.fontSize}px`);
+      }
 
-  // Force save settings immediately
-  const forceSave = async () => {
-    return await saveSettings();
-  };
+      if (state.settings.editor?.fontSize) {
+        root.style.setProperty('--font-size-editor-base', `${state.settings.editor.fontSize}px`);
+      }
+
+      if (state.settings.editor?.lineHeight) {
+        root.style.setProperty('--line-height-editor', state.settings.editor.lineHeight);
+      }
+
+      if (state.settings.editor?.fontFamily && state.settings.editor.fontFamily !== 'default') {
+        let fontFamily;
+        switch (state.settings.editor.fontFamily) {
+          case 'serif':
+            fontFamily = 'Georgia, "Times New Roman", serif';
+            break;
+          case 'monospace':
+            fontFamily = 'Monaco, "Cascadia Code", "Roboto Mono", monospace';
+            break;
+          case 'system':
+            fontFamily = '-apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif';
+            break;
+          default:
+            fontFamily = 'inherit';
+        }
+        root.style.setProperty('--font-family-editor', fontFamily);
+      }
+    };
+
+    if (!state.isLoading) {
+      applySettingsToDOM();
+    }
+  }, [state.settings, state.isLoading]);
 
   // Context value
   const contextValue = {
     // State
-    settings: state,
-    isLoaded: state.isLoaded,
-    hasUnsavedChanges: state.hasUnsavedChanges,
-
-    // Getters
-    getSetting,
-    getNestedSetting,
-    getSection,
-    hasChangesFromDefaults,
+    settings: state.settings,
+    isLoading: state.isLoading,
+    error: state.error,
 
     // Actions
+    updateSettings,
+    resetSettings,
+    getSetting,
     updateSetting,
-    updateNestedSetting,
-    updateMultipleSettings,
-    resetAllSettings,
-    resetSection,
-    saveSettings,
-    forceSave,
-
-    // Validation
-    validateSetting,
-
-    // Import/Export
     exportSettings,
-    importSettings,
-
-    // Specific setting getters for convenience
-    theme: state.theme,
-    editor: state.editor,
-    layout: state.layout,
-    files: state.files,
-    writing: state.writing,
-    performance: state.performance
+    importSettings
   };
 
   return (

@@ -190,8 +190,9 @@ const ThemeToggle = ({ showLabel = false, size = 'md' }) => {
     </div>
   );
 
-  // For header use, show simple toggle; for settings, show dropdown
-  return availableThemes.length <= 4 ? <SimpleToggle /> : <DropdownToggle />;
+  // For header use (small size), ALWAYS show simple toggle for performance
+  // For settings, show dropdown with all themes
+  return size === 'sm' ? <SimpleToggle /> : <DropdownToggle />;
 };
 
 export default ThemeToggle;

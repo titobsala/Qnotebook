@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer, useEffect } from 'react';
+import React, { createContext, useContext, useReducer, useEffect, useCallback } from 'react';
 import { THEMES, STORAGE_KEYS, CSS_VARIABLES } from '../utils/constants.js';
 
 // Initial state
@@ -196,8 +196,8 @@ export const ThemeProvider = ({ children }) => {
     return getThemeById(state.currentTheme);
   };
 
-  // Set theme
-  const setTheme = (themeId) => {
+  // Set theme with debouncing to prevent rapid switches
+  const setTheme = useCallback((themeId) => {
     if (!themeId || !getThemeById(themeId)) {
       console.warn(`Theme ${themeId} not found`);
       return;
@@ -207,16 +207,24 @@ export const ThemeProvider = ({ children }) => {
       type: THEME_ACTIONS.SET_THEME,
       payload: themeId
     });
-  };
+  }, []);
 
-  // Toggle between light and dark theme
-  const toggleTheme = () => {
+  // Debounced theme setter for performance
+  const debouncedSetTheme = useCallback((themeId) => {
+    clearTimeout(window.themeDebounceTimeout);
+    window.themeDebounceTimeout = setTimeout(() => {
+      setTheme(themeId);
+    }, 100); // 100ms debounce
+  }, [setTheme]);
+
+  // Toggle between light and dark theme (instant, no debounce for toggle)
+  const toggleTheme = useCallback(() => {
     const currentTheme = getCurrentTheme();
     const newTheme = currentTheme.type === 'light'
       ? state.themePreferences.darkTheme
       : state.themePreferences.lightTheme;
     setTheme(newTheme);
-  };
+  }, [state.themePreferences.darkTheme, state.themePreferences.lightTheme, setTheme]);
 
   // Create custom theme
   const createCustomTheme = (themeData) => {
@@ -369,6 +377,7 @@ export const ThemeProvider = ({ children }) => {
 
     // Actions
     setTheme,
+    debouncedSetTheme,
     toggleTheme,
     createCustomTheme,
     updateCustomTheme,
