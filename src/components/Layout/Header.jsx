@@ -22,6 +22,7 @@ const Header = ({ onToggleSidebar, isSidebarCollapsed }) => {
   const [showViewMenu, setShowViewMenu] = useState(false);
   const [showWindowMenu, setShowWindowMenu] = useState(false);
   const [showHelpMenu, setShowHelpMenu] = useState(false);
+
   const [showSettings, setShowSettings] = useState(false);
   const [isMaximized, setIsMaximized] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -296,7 +297,7 @@ Other:
             </svg>
           </button>
 
-          {/* Menu Bar */}
+          {/* Custom Menu Bar - Always visible */}
           <nav className="menu-bar" role="menubar">
             {/* File Menu */}
             <div className="menu-item">
@@ -511,7 +512,7 @@ Other:
         </div>
       </div>
 
-      {/* Backdrop to close menus when clicking outside */}
+      {/* Backdrop to close menus when clicking outside - Always show when there are visible menus */}
       {(showFileMenu || showEditMenu || showViewMenu || showWindowMenu || showHelpMenu) && (
         <div className="menu-backdrop" onClick={closeAllMenus} />
       )}

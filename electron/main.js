@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, dialog } = require('electron');
+const { app, BrowserWindow, ipcMain, dialog, Menu } = require('electron');
 const path = require('path');
 const { readFile, writeFile } = require('fs').promises;
 const http = require('http');
@@ -108,7 +108,11 @@ async function createWindow() {
 }
 
 // App event handlers
-app.whenReady().then(createWindow);
+app.whenReady().then(() => {
+  // Remove the default menu bar to use only our custom menu bar
+  Menu.setApplicationMenu(null);
+  createWindow();
+});
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
