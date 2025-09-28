@@ -4,27 +4,27 @@ export const THEMES = {
   // Light Themes
   LIGHT: {
     id: 'light',
-    name: 'Classic Light',
+    name: 'Light',
     type: 'light',
-    description: 'Clean light theme with off-white background'
+    description: 'Clean light theme'
   },
   LIGHT_MINIMAL: {
     id: 'light-minimal',
-    name: 'Minimal White',
+    name: 'Minimal',
     type: 'light',
-    description: 'Pure white minimal theme'
+    description: 'Pure white minimal'
   },
   LIGHT_WARM: {
     id: 'light-warm',
-    name: 'Soft Cream',
+    name: 'Cream',
     type: 'light',
-    description: 'Warm cream-toned theme for comfortable reading'
+    description: 'Warm cream tones'
   },
   GITHUB_LIGHT: {
     id: 'github-light',
-    name: 'GitHub Light',
+    name: 'GitHub',
     type: 'light',
-    description: 'GitHub-inspired light theme'
+    description: 'GitHub-inspired'
   },
 
   // Dark Themes
@@ -36,42 +36,42 @@ export const THEMES = {
   },
   DARK_PROFESSIONAL: {
     id: 'dark-professional',
-    name: 'Dark Professional',
+    name: 'Pro Dark',
     type: 'dark',
-    description: 'GitHub-inspired professional dark theme'
+    description: 'Professional dark'
   },
   DARK_DEEP: {
     id: 'dark-deep',
-    name: 'Deep Black',
+    name: 'Deep',
     type: 'dark',
-    description: 'OLED-friendly pure black theme'
+    description: 'OLED-friendly black'
   },
   DARK_NORD: {
     id: 'dark-nord',
-    name: 'Nord Dark',
+    name: 'Nord',
     type: 'dark',
-    description: 'Arctic-inspired dark theme'
+    description: 'Arctic-inspired'
   },
   DRACULA: {
     id: 'dracula',
     name: 'Dracula',
     type: 'dark',
-    description: 'Popular purple-accented dark theme'
+    description: 'Purple-accented'
   },
 
   // Accessibility Themes
   HIGH_CONTRAST_LIGHT: {
     id: 'high-contrast-light',
-    name: 'High Contrast Light',
+    name: 'High Contrast',
     type: 'light',
-    description: 'High contrast theme for better accessibility',
+    description: 'Better accessibility',
     accessibility: true
   },
   HIGH_CONTRAST_DARK: {
     id: 'high-contrast-dark',
-    name: 'High Contrast Dark',
+    name: 'HC Dark',
     type: 'dark',
-    description: 'High contrast dark theme for better accessibility',
+    description: 'Accessible dark',
     accessibility: true
   },
 
@@ -80,28 +80,28 @@ export const THEMES = {
     id: 'sepia',
     name: 'Sepia',
     type: 'light',
-    description: 'Warm sepia tone for comfortable reading',
+    description: 'Warm sepia tones',
     specialty: true
   },
   FOCUS: {
     id: 'focus',
-    name: 'Focus Mode',
+    name: 'Focus',
     type: 'light',
-    description: 'Distraction-free writing environment',
+    description: 'Distraction-free',
     specialty: true
   },
   EYE_COMFORT: {
     id: 'eye-comfort',
-    name: 'Eye Comfort',
+    name: 'Eye Care',
     type: 'light',
-    description: 'Reduced blue light theme for extended reading',
+    description: 'Reduced blue light',
     specialty: true
   },
   PRINT_PREVIEW: {
     id: 'print-preview',
-    name: 'Print Preview',
+    name: 'Print',
     type: 'light',
-    description: 'Optimized for print preview',
+    description: 'Print optimized',
     hidden: true
   }
 };

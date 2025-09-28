@@ -122,9 +122,9 @@
 
   /* Layout Dimensions */
   --header-height: 3rem;        /* 48px */
-  --sidebar-width: 16rem;       /* 256px */
+  --sidebar-width: 18.5rem;     /* 296px - 15% larger than 256px */
   --sidebar-width-collapsed: 3rem; /* 48px */
-  --statusbar-height: 1.75rem;  /* 28px */
+  --statusbar-height: 1.925rem;  /* 30.8px - 10% increase */
   --toolbar-height: 2.5rem;     /* 40px */
 
   /* Component Heights */
@@ -190,6 +190,186 @@
   --color-editor-cursor: #f7fafc;
   --color-editor-line-numbers: #a0aec0;
   --color-editor-current-line: #374151;
+}
+
+/* ===== DARK PROFESSIONAL THEME OVERRIDES ===== */
+[data-theme="dark-professional"] {
+  /* Background Colors */
+  --color-bg-primary: #1a1a1a;      /* Professional dark background */
+  --color-bg-secondary: #2a2a2a;    /* Professional secondary background */
+  --color-bg-tertiary: #3a3a3a;     /* Professional tertiary background */
+  --color-bg-elevated: #2a2a2a;     /* Professional elevated surfaces */
+  --color-bg-overlay: rgba(0, 0, 0, 0.8); /* Professional modal overlay */
+
+  /* Text Colors */
+  --color-text-primary: #f5f5f5;    /* Professional light text */
+  --color-text-secondary: #e0e0e0;  /* Professional secondary text */
+  --color-text-tertiary: #b0b0b0;   /* Professional tertiary text */
+  --color-text-inverse: #1a1a1a;    /* Professional dark text */
+  --color-text-muted: #888888;      /* Professional muted text */
+
+  /* UI Element Colors */
+  --color-border-primary: #3a3a3a;
+  --color-border-secondary: #555555;
+  --color-border-focus: #5a9fd4;
+  --color-divider: #3a3a3a;
+
+  /* Interactive Colors */
+  --color-hover: #333333;
+  --color-active: #3a3a3a;
+  --color-focus: #5a9fd4;
+  --color-focus-ring: rgba(90, 159, 212, 0.2);
+
+  /* Editor Specific Colors */
+  --color-editor-bg: #2a2a2a;
+  --color-editor-selection: #3a3a3a;
+  --color-editor-cursor: #f5f5f5;
+  --color-editor-line-numbers: #b0b0b0;
+  --color-editor-current-line: #333333;
+}
+
+/* ===== DARK DEEP THEME OVERRIDES (OLED-friendly) ===== */
+[data-theme="dark-deep"] {
+  /* Background Colors */
+  --color-bg-primary: #000000;      /* Pure black background */
+  --color-bg-secondary: #111111;    /* Near-black secondary */
+  --color-bg-tertiary: #222222;     /* Near-black tertiary */
+  --color-bg-elevated: #111111;     /* Near-black elevated surfaces */
+  --color-bg-overlay: rgba(0, 0, 0, 0.9); /* Deep black modal overlay */
+
+  /* Text Colors */
+  --color-text-primary: #ffffff;    /* Pure white text */
+  --color-text-secondary: #e6e6e6;  /* Near-white secondary text */
+  --color-text-tertiary: #cccccc;   /* Light gray tertiary text */
+  --color-text-inverse: #000000;    /* Pure black text */
+  --color-text-muted: #999999;      /* Gray muted text */
+
+  /* UI Element Colors */
+  --color-border-primary: #333333;
+  --color-border-secondary: #555555;
+  --color-border-focus: #4a9eff;
+  --color-divider: #222222;
+
+  /* Interactive Colors */
+  --color-hover: #1a1a1a;
+  --color-active: #222222;
+  --color-focus: #4a9eff;
+  --color-focus-ring: rgba(74, 158, 255, 0.2);
+
+  /* Editor Specific Colors */
+  --color-editor-bg: #111111;
+  --color-editor-selection: #222222;
+  --color-editor-cursor: #ffffff;
+  --color-editor-line-numbers: #cccccc;
+  --color-editor-current-line: #1a1a1a;
+}
+
+/* ===== DARK NORD THEME OVERRIDES ===== */
+[data-theme="dark-nord"] {
+  /* Background Colors */
+  --color-bg-primary: #2e3440;      /* Nord polar night */
+  --color-bg-secondary: #3b4252;    /* Nord polar night lighter */
+  --color-bg-tertiary: #434c5e;     /* Nord polar night lightest */
+  --color-bg-elevated: #3b4252;     /* Nord elevated surfaces */
+  --color-bg-overlay: rgba(46, 52, 64, 0.8); /* Nord overlay */
+
+  /* Text Colors */
+  --color-text-primary: #d8dee9;    /* Nord snow storm */
+  --color-text-secondary: #eceff4;  /* Nord snow storm brighter */
+  --color-text-tertiary: #e5e9f0;   /* Nord snow storm brightest */
+  --color-text-inverse: #2e3440;    /* Nord polar night */
+  --color-text-muted: #b48ead;      /* Nord frost purple */
+
+  /* UI Element Colors */
+  --color-border-primary: #434c5e;
+  --color-border-secondary: #5e81ac;
+  --color-border-focus: #88c0d0;
+  --color-divider: #3b4252;
+
+  /* Interactive Colors */
+  --color-hover: #373e4d;
+  --color-active: #3b4252;
+  --color-focus: #88c0d0;
+  --color-focus-ring: rgba(136, 192, 208, 0.2);
+
+  /* Editor Specific Colors */
+  --color-editor-bg: #3b4252;
+  --color-editor-selection: #434c5e;
+  --color-editor-cursor: #d8dee9;
+  --color-editor-line-numbers: #e5e9f0;
+  --color-editor-current-line: #373e4d;
+}
+
+/* ===== DRACULA THEME OVERRIDES ===== */
+[data-theme="dracula"] {
+  /* Background Colors */
+  --color-bg-primary: #282a36;      /* Dracula background */
+  --color-bg-secondary: #44475a;    /* Dracula current line */
+  --color-bg-tertiary: #6272a4;     /* Dracula selection */
+  --color-bg-elevated: #44475a;     /* Dracula elevated surfaces */
+  --color-bg-overlay: rgba(40, 42, 54, 0.8); /* Dracula overlay */
+
+  /* Text Colors */
+  --color-text-primary: #f8f8f2;    /* Dracula foreground */
+  --color-text-secondary: #6272a4;   /* Dracula comment */
+  --color-text-tertiary: #bd93f9;   /* Dracula purple */
+  --color-text-inverse: #282a36;    /* Dracula background */
+  --color-text-muted: #8be9fd;      /* Dracula cyan */
+
+  /* UI Element Colors */
+  --color-border-primary: #6272a4;
+  --color-border-secondary: #44475a;
+  --color-border-focus: #50fa7b;
+  --color-divider: #44475a;
+
+  /* Interactive Colors */
+  --color-hover: #383a46;
+  --color-active: #44475a;
+  --color-focus: #50fa7b;
+  --color-focus-ring: rgba(80, 250, 123, 0.2);
+
+  /* Editor Specific Colors */
+  --color-editor-bg: #44475a;
+  --color-editor-selection: #6272a4;
+  --color-editor-cursor: #f8f8f2;
+  --color-editor-line-numbers: #bd93f9;
+  --color-editor-current-line: #383a46;
+}
+
+/* ===== HIGH CONTRAST DARK THEME OVERRIDES ===== */
+[data-theme="high-contrast-dark"] {
+  /* Background Colors */
+  --color-bg-primary: #000000;      /* Pure black background */
+  --color-bg-secondary: #1a1a1a;    /* High contrast secondary */
+  --color-bg-tertiary: #333333;     /* High contrast tertiary */
+  --color-bg-elevated: #1a1a1a;     /* High contrast elevated */
+  --color-bg-overlay: rgba(0, 0, 0, 0.95); /* High contrast overlay */
+
+  /* Text Colors */
+  --color-text-primary: #ffffff;    /* Pure white text */
+  --color-text-secondary: #ffffff;  /* White secondary text */
+  --color-text-tertiary: #ffffff;   /* White tertiary text */
+  --color-text-inverse: #000000;    /* Pure black text */
+  --color-text-muted: #cccccc;      /* Light gray muted text */
+
+  /* UI Element Colors */
+  --color-border-primary: #ffffff;
+  --color-border-secondary: #ffffff;
+  --color-border-focus: #ffff00;
+  --color-divider: #ffffff;
+
+  /* Interactive Colors */
+  --color-hover: #333333;
+  --color-active: #1a1a1a;
+  --color-focus: #ffff00;
+  --color-focus-ring: rgba(255, 255, 0, 0.3);
+
+  /* Editor Specific Colors */
+  --color-editor-bg: #1a1a1a;
+  --color-editor-selection: #333333;
+  --color-editor-cursor: #ffffff;
+  --color-editor-line-numbers: #ffffff;
+  --color-editor-current-line: #333333;
 }
 
 /* ===== RESET & BASE STYLES ===== */

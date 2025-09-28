@@ -1,5 +1,6 @@
 import React from 'react';
 import { useEditor } from '../../contexts/EditorContext.jsx';
+import Icon from '../UI/Icon.jsx';
 import './StatusBar.css';
 
 const StatusBar = () => {
@@ -7,7 +8,6 @@ const StatusBar = () => {
     getActiveDocument,
     getDocumentStats,
     documents,
-    hasUnsavedChanges
   } = useEditor();
 
 
@@ -32,92 +32,70 @@ const StatusBar = () => {
 
   return (
     <div className="status-bar" role="status">
-      <div className="status-left">
-        {/* Document Info */}
+      {/* Left Section - Document Status */}
+      <div className="status-section left">
         {activeDocument && (
-          <>
-            <div className="status-item document-status">
-              <span className="label">Document:</span>
-              <span className="value">{activeDocument.name}</span>
-              {activeDocument.isModified && (
-                <span className="modified-indicator" title="Document has unsaved changes">●</span>
-              )}
-            </div>
-
-            {activeDocument.filePath && (
-              <div className="status-item file-path">
-                <span className="value" title={activeDocument.filePath}>
-                  {activeDocument.filePath.split('/').pop()}
-                </span>
-              </div>
+          <div className="status-pill document-pill">
+            <Icon name="file-text" size={14} />
+            <span className="document-name" title={activeDocument.name}>
+              {activeDocument.name}
+            </span>
+            {activeDocument.isModified && (
+              <div className="modified-dot" title="Document has unsaved changes" />
             )}
-          </>
-        )}
-
-        {/* Multiple Documents Indicator */}
-        {documents.length > 1 && (
-          <div className="status-item documents-count">
-            <span className="value">{documents.length} documents open</span>
           </div>
         )}
 
-        {/* Unsaved Changes Indicator */}
-        {hasUnsavedChanges() && (
-          <div className="status-item unsaved-changes">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
-              <circle cx="12" cy="12" r="10"/>
-            </svg>
-            <span className="value">Unsaved changes</span>
+        {documents.length > 1 && (
+          <div className="status-pill docs-pill">
+            <Icon name="folder-open" size={14} />
+            <span>{documents.length} docs</span>
           </div>
         )}
       </div>
 
-      <div className="status-center">
-        {/* Document Statistics */}
+      {/* Center Section - Document Statistics */}
+      <div className="status-section center">
         {documentStats && (
-          <div className="status-group stats">
-            <div className="status-item word-count">
-              <span className="label">Words:</span>
-              <span className="value">{documentStats.wordCount.toLocaleString()}</span>
+          <div className="stats-container">
+            <div className="status-pill stats-pill">
+              <Icon name="edit-3" size={14} />
+              <span>{documentStats.wordCount.toLocaleString()} words</span>
             </div>
 
-            <div className="status-item char-count">
-              <span className="label">Characters:</span>
-              <span className="value">{documentStats.characterCount.toLocaleString()}</span>
+            <div className="status-pill stats-pill">
+              <Icon name="type" size={14} />
+              <span>{documentStats.characterCount.toLocaleString()} chars</span>
             </div>
 
             {documentStats.readingTime > 0 && (
-              <div className="status-item reading-time">
-                <span className="value">{formatReadingTime(documentStats.readingTime)}</span>
+              <div className="status-pill stats-pill">
+                <Icon name="clock" size={14} />
+                <span>{formatReadingTime(documentStats.readingTime)}</span>
               </div>
             )}
           </div>
         )}
       </div>
 
-      <div className="status-right">
-        {/* File Info */}
+      {/* Right Section - File Info & Time */}
+      <div className="status-section right">
         {activeDocument && (
-          <div className="status-group file-info">
-            <div className="status-item file-size">
-              <span className="label">Size:</span>
-              <span className="value">{formatFileSize(activeDocument.content)}</span>
+          <div className="file-info-container">
+            <div className="status-pill file-pill">
+              <Icon name="hard-drive" size={14} />
+              <span>{formatFileSize(activeDocument.content)}</span>
             </div>
 
-            <div className="status-item encoding">
-              <span className="value">UTF-8</span>
-            </div>
-
-            <div className="status-item line-endings">
-              <span className="value">LF</span>
+            <div className="status-pill file-pill">
+              <span>UTF-8</span>
             </div>
           </div>
         )}
 
-
-        {/* Current Time */}
-        <div className="status-item current-time">
-          <span className="value">
+        <div className="status-pill time-pill">
+          <Icon name="clock" size={14} />
+          <span>
             {new Date().toLocaleTimeString([], {
               hour: '2-digit',
               minute: '2-digit'

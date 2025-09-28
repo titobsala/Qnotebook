@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useEditor } from '../../contexts/EditorContext.jsx';
 import { useTheme } from '../../contexts/ThemeContext.jsx';
+import Icon from '../UI/Icon.jsx';
 import './Sidebar.css';
 
 const Sidebar = ({ isCollapsed, onToggleCollapse }) => {
@@ -16,10 +17,10 @@ const Sidebar = ({ isCollapsed, onToggleCollapse }) => {
   const { availableThemes, currentTheme, setTheme } = useTheme();
 
   const tabs = [
-    { id: 'files', name: 'Files', icon: '📁' },
-    { id: 'recent', name: 'Recent', icon: '📝' },
-    { id: 'themes', name: 'Themes', icon: '🎨' },
-    { id: 'outline', name: 'Outline', icon: '📋' }
+    { id: 'files', name: 'Files', icon: 'folder', title: 'File Explorer' },
+    { id: 'recent', name: 'Recent', icon: 'history', title: 'Recent Files' },
+    { id: 'themes', name: 'Themes', icon: 'palette', title: 'Theme Manager' },
+    { id: 'outline', name: 'Outline', icon: 'list', title: 'Document Outline' }
   ];
 
   const handleDocumentSelect = (documentId) => {
@@ -48,7 +49,7 @@ const Sidebar = ({ isCollapsed, onToggleCollapse }) => {
           onClick={handleNewDocument}
           title="New Document"
         >
-          +
+          <Icon name="plus" size={14} />
         </button>
       </div>
 
@@ -67,9 +68,12 @@ const Sidebar = ({ isCollapsed, onToggleCollapse }) => {
               className={`document-item ${doc.id === activeDocumentId ? 'active' : ''}`}
               onClick={() => handleDocumentSelect(doc.id)}
             >
+              <div className="document-icon">
+                <Icon name="file-text" size={16} />
+              </div>
               <div className="document-info">
                 <span className="document-name">{doc.name}</span>
-                {doc.isModified && <span className="modified-dot">●</span>}
+                {doc.isModified && <Icon name="dot" size={8} className="modified-indicator" />}
               </div>
               {doc.filePath && (
                 <div className="document-path">{doc.filePath}</div>
@@ -79,7 +83,7 @@ const Sidebar = ({ isCollapsed, onToggleCollapse }) => {
                 onClick={(e) => handleCloseDocument(e, doc.id)}
                 title="Close Document"
               >
-                ×
+                <Icon name="x" size={12} />
               </button>
             </div>
           ))
@@ -102,6 +106,9 @@ const Sidebar = ({ isCollapsed, onToggleCollapse }) => {
         ) : (
           recentFiles.slice(0, 10).map((file, index) => (
             <div key={`${file.path}-${index}`} className="recent-file-item">
+              <div className="file-icon">
+                <Icon name="file-text" size={16} />
+              </div>
               <div className="file-info">
                 <span className="file-name">{file.name}</span>
                 <span className="file-path">{file.path}</span>
@@ -131,7 +138,10 @@ const Sidebar = ({ isCollapsed, onToggleCollapse }) => {
           >
             <div className="theme-preview">
               <div className={`preview-dot ${theme.type}`}>
-                {theme.type === 'dark' ? '🌙' : '☀️'}
+                <Icon
+                  name={theme.type === 'dark' ? 'moon' : 'sun'}
+                  size={14}
+                />
               </div>
             </div>
             <div className="theme-info">
@@ -141,7 +151,9 @@ const Sidebar = ({ isCollapsed, onToggleCollapse }) => {
               )}
             </div>
             {theme.id === currentTheme && (
-              <div className="active-indicator">✓</div>
+              <div className="active-indicator">
+                <Icon name="check" size={14} />
+              </div>
             )}
           </div>
         ))}
@@ -191,9 +203,9 @@ const Sidebar = ({ isCollapsed, onToggleCollapse }) => {
                 setActiveTab(tab.id);
                 onToggleCollapse();
               }}
-              title={tab.name}
+              title={tab.title}
             >
-              <span className="tab-icon">{tab.icon}</span>
+              <Icon name={tab.icon} size={16} className="tab-icon" />
             </button>
           ))}
         </div>
@@ -210,8 +222,9 @@ const Sidebar = ({ isCollapsed, onToggleCollapse }) => {
               key={tab.id}
               className={`tab-button ${tab.id === activeTab ? 'active' : ''}`}
               onClick={() => setActiveTab(tab.id)}
+              title={tab.title}
             >
-              <span className="tab-icon">{tab.icon}</span>
+              <Icon name={tab.icon} size={16} className="tab-icon" />
               <span className="tab-label">{tab.name}</span>
             </button>
           ))}
@@ -222,9 +235,7 @@ const Sidebar = ({ isCollapsed, onToggleCollapse }) => {
           onClick={onToggleCollapse}
           title="Collapse Sidebar"
         >
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <polyline points="15,18 9,12 15,6" />
-          </svg>
+          <Icon name="chevron-left" size={14} />
         </button>
       </div>
 
